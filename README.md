@@ -18,6 +18,8 @@ bun install -g @suno/cli
 
 ## Usage
 
+### Single URL Download
+Download a single song:
 ```bash
 suno <suno_url>
 ```
@@ -25,6 +27,21 @@ suno <suno_url>
 For example:
 ```bash
 suno https://app.suno.ai/your-song-url
+```
+
+### Multiple URLs Download
+Download multiple songs by providing URLs separated by newlines within quotes:
+```bash
+suno "<suno_url1>
+<suno_url2>
+<suno_url3>"
+```
+
+For example:
+```bash
+suno "https://app.suno.ai/your-first-song-url
+https://app.suno.ai/your-second-song-url
+https://app.suno.ai/your-third-song-url"
 ```
 
 The tool will download:
