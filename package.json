@@ -1,5 +1,5 @@
 {
-  "name": "@suno/cli",
+  "name": "suno-cli",
   "version": "1.0.0",
   "description": "CLI tool for downloading content from Suno",
   "type": "module",
@@ -23,8 +23,8 @@
     "cli",
     "downloader"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "kevinxft",
+  "license": "MIT",
   "dependencies": {
     "axios": "latest",
     "cheerio": "latest"

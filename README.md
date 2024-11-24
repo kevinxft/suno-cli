@@ -1,4 +1,4 @@
-# @suno/cli
+# suno-cli
 
 A command-line tool for downloading content from Suno.
 
@@ -7,13 +7,13 @@ A command-line tool for downloading content from Suno.
 You can install the CLI tool globally using npm:
 
 ```bash
-npm install -g @suno/cli
+npm install -g suno-cli
 ```
 
 Or using bun:
 
 ```bash
-bun install -g @suno/cli
+bun install -g suno-cli
 ```
 
 ## Usage
