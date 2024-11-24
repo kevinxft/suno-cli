@@ -90,7 +90,7 @@ const downloadFile = async (url: string, outputPath: string): Promise<DownloadRe
 // Function to scrape Suno webpage
 const scrapeSuno = async (sunoUrl: string): Promise<ScrapeResult> => {
   try {
-    console.log(`Fetching page: ${sunoUrl}`);
+    console.log(`\nFetching page: ${sunoUrl}`);
     const { data: html } = await axios.get(sunoUrl, { timeout: 30000 });
     const $: CheerioAPI = cheerio.load(html);
 
@@ -149,24 +149,50 @@ const isValidUrl = (url: string): boolean => {
   }
 };
 
+// Process multiple URLs
+const processUrls = async (urls: string[]): Promise<void> => {
+  console.log(`Found ${urls.length} URLs to process`);
+  
+  for (const url of urls) {
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl) continue;
+    
+    if (!isValidUrl(trimmedUrl)) {
+      console.error(`Invalid URL: ${trimmedUrl}`);
+      continue;
+    }
+
+    try {
+      const result = await scrapeSuno(trimmedUrl);
+      if (result.error) {
+        console.error(`Failed to process ${trimmedUrl}: ${result.error}`);
+      }
+    } catch (error) {
+      console.error(`Error processing ${trimmedUrl}: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  
+  console.log("\nAll downloads completed!");
+};
+
 // CLI entry point
 const main = async (): Promise<void> => {
   const args = process.argv.slice(2);
   if (args.length === 0) {
-    console.error("Usage: suno <suno_url>");
+    console.error("Usage: suno <suno_url(s)>");
+    console.error("Multiple URLs should be separated by newlines");
     process.exit(1);
   }
 
-  const sunoUrl = args[0];
-  if (!isValidUrl(sunoUrl)) {
-    console.error("Error: Please provide a valid URL");
+  // Join all arguments and split by newlines to handle multiple URLs
+  const urls = args.join(" ").split("\n").filter(url => url.trim());
+  
+  if (urls.length === 0) {
+    console.error("No valid URLs provided");
     process.exit(1);
   }
 
-  const result = await scrapeSuno(sunoUrl);
-  if (result.error) {
-    process.exit(1);
-  }
+  await processUrls(urls);
 };
 
 // Handle unhandled rejections
