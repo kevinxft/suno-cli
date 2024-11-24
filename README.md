@@ -70,6 +70,12 @@ To watch for changes during development:
 bun run dev <suno_url>
 ```
 
+To deploy locally:
+```bash
+bun run deploy
+```
+This will build the project and create a global link, allowing you to use the `suno` command globally.
+
 ## Building
 
 To build the CLI:
