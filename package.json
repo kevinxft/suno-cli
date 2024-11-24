@@ -1,0 +1,40 @@
+{
+  "name": "@suno/cli",
+  "version": "1.0.0",
+  "description": "CLI tool for downloading content from Suno",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "suno": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "bun run index.ts",
+    "dev": "bun --watch index.ts",
+    "prepublish": "tsc",
+    "deploy": "bun run build && bun link"
+  },
+  "keywords": [
+    "suno",
+    "cli",
+    "downloader"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "latest",
+    "cheerio": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "@types/node": "latest",
+    "typescript": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
